@@ -1,6 +1,6 @@
 {
   "name": "fastboot-aws",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.2",
   "description": "A FastBoot server for AWS",
   "main": "server.js",
   "scripts": {
@@ -11,13 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/tomdale/fastboot-aws.git"
   },
-  "keywords": [
-    "ember",
-    "fastboot",
-    "aws",
-    "elasticbeanstalk",
-    "s3"
-  ],
+  "keywords": ["ember", "fastboot", "aws", "elasticbeanstalk", "s3"],
   "author": "Tom Dale <tom@tomdale.net>",
   "license": "MIT",
   "bugs": {
@@ -25,12 +19,12 @@
   },
   "homepage": "https://github.com/tomdale/fastboot-aws#readme",
   "dependencies": {
-    "fastboot-app-server": "^1.0.0-beta.2",
-    "fastboot-redis-cache": "^0.1.0",
-    "fastboot-s3-downloader": "^0.2.0",
-    "fastboot-s3-notifier": "^0.1.1"
+    "fastboot-app-server": "^1.0.2",
+    "fastboot-redis-cache": "^0.2.0",
+    "fastboot-s3-downloader": "^0.2.2",
+    "fastboot-s3-notifier": "^0.1.2"
   },
   "devDependencies": {
-    "aws-sdk": "^2.3.7"
+    "aws-sdk": "^2.133.0"
   }
 }
