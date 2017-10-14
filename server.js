@@ -23,6 +23,15 @@ let notifier = new S3Notifier({
   key: S3_KEY
 });
 
+const enforceHTTPS = function(req, res, next) {
+  // Header indicates edge server received request over HTTPS
+  if (req.headers["x-forwarded-proto"] === "https") {
+    return next();
+  } else {
+    // Did not come over HTTPS. Fix that!
+    return res.redirect(301, `https://${req.hostname}${req.url}`);
+  }
+};
 let cache;
 if (REDIS_HOST || REDIS_PORT) {
   cache = new RedisCache({
@@ -38,7 +47,22 @@ let server = new FastBootAppServer({
   downloader: downloader,
   notifier: notifier,
   cache: cache,
-  gzip: true
+  username: USERNAME,
+  password: PASSWORD,
+  gzip: true,
+  beforeMiddleware(app) {
+    app.use((req, res, next) => {
+      if (
+        process.env.DISABLE_FORCE_HTTPS || // Ability to disable force HTTPS via env
+        req.headers["user-agent"].indexOf("HealthChecker") >= 0
+      ) {
+        // EBS health over HTTP
+        return next(); // Proceed as planned (http or https -- whatever was asked for)
+      } else {
+        return enforceHTTPS(req, res, next); // Middleware to force all other HTTP --> HTTPS
+      }
+    });
+  }
 });
 
 server.start();
