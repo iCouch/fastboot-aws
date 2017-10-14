@@ -1,6 +1,6 @@
 {
   "name": "fastboot-aws",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A FastBoot server for AWS",
   "main": "server.js",
   "scripts": {
