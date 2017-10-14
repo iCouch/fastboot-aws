@@ -38,8 +38,7 @@ let server = new FastBootAppServer({
   downloader: downloader,
   notifier: notifier,
   cache: cache,
-  gzip: true,
-  port: 80
+  gzip: true
 });
 
 server.start();
